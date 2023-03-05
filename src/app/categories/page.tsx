@@ -40,7 +40,7 @@ export default function Categories() {
       <div className={styles.list}>
 
         {data.map(item => (
-          <Link key={item.name} href={`/categories/${item.link}`} className={styles.list_link}>
+          <Link key={item.name} href={`/category/${item.link}`} className={styles.list_link}>
             <div>
               <h2 className={styles.list_name}>{item.name}</h2>
               <img src={item.src}/>
