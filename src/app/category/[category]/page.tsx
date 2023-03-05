@@ -5,26 +5,22 @@
 
 // import { addToFavoriteList } from "../../features/products/productsSlice";
 import { useRouter } from 'next/router';
-import Item from '@/components/item/page';
-
-import PurplePhone from "@/assets/images/18503-63Deeppurple.jpg";
-import PinkPhone from "@/assets/images/14677-597Pink.jpg";
-import GreyPhone from "@/assets/images/12454-787bigeek_image1.jpeg";
+import Card from '@/components/Card/page';
 
 const products = [
   {
     id: 1,
     name: 'Apple iPhone 14 Pro Max',
-    image: PurplePhone,
+    image: 'images/18503-63Deeppurple.jpg',
     price: 114990,
     description: 'Apple iPhone 14 Pro Max 128GB (Тёмно-фиолетовый | Deep Purple)',
     link: '/apple-iphone-14-pro-max-128gb-deep-purple',
-    isFavorite: false,
+    isFavorite: true,
   },
   {
     id: 2,
     name: 'Apple iPhone 13 mini',
-    image: PinkPhone,
+    image: 'images/14677-597Pink.jpg',
     price: 70990,
     description: 'Apple iPhone 13 mini 128GB (Розовый | Pink)',
     link: '/apple-iphone-13-mini-128gb-pink',
@@ -33,7 +29,7 @@ const products = [
   {
     id: 3,
     name: 'Apple iPhone 12 Pro',
-    image: GreyPhone,
+    image: 'images/12454-787bigeek_image1.jpeg',
     price: 78990,
     description: 'Apple iPhone 12 Pro Max 128GB (Графитовый | Graphite)',
     link: '/apple-iphone-12-pro-max-128gb-graphite',
@@ -42,7 +38,7 @@ const products = [
   {
     id: 4,
     name: 'Apple iPhone 14 Pro Max',
-    image: PurplePhone,
+    image: 'images/18503-63Deeppurple.jpg',
     price: 114990,
     description: 'Apple iPhone 14 Pro Max 128GB (Тёмно-фиолетовый | Deep Purple)',
     link: '/apple-iphone-14-pro-max-128gb-deep-purple',
@@ -51,7 +47,7 @@ const products = [
   {
     id: 5,
     name: 'Apple iPhone 13 mini',
-    image: PinkPhone,
+    image: 'images/14677-597Pink.jpg',
     price: 70990,
     description: 'Apple iPhone 13 mini 128GB (Розовый | Pink)',
     link: '/apple-iphone-13-mini-128gb-pink',
@@ -60,7 +56,7 @@ const products = [
   {
     id: 6,
     name: 'Apple iPhone 12 Pro',
-    image: GreyPhone,
+    image: 'images/12454-787bigeek_image1.jpeg',
     price: 78990,
     description: 'Apple iPhone 12 Pro Max 128GB (Графитовый | Graphite)',
     link: '/apple-iphone-12-pro-max-128gb-graphite',
@@ -94,7 +90,7 @@ export default function Category({ ...params }: any) {
         <h1 className='products-title'>{''}</h1>
         <div className='products-list'>
           {products.map((product: any, i: number) => (
-            <Item
+            <Card
               key={product.name + i}
               link={``}
               data={product}
