@@ -1,0 +1,25 @@
+.main {
+  background: var(--tg-theme-bg-color);
+  height: 100vh;
+}
+
+.title {
+  margin: 0;
+  padding: 20px 0;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  &_link {
+    text-decoration: none;
+    color: var(--tg-theme-text-color);
+  }
+
+  &_name {
+    margin: 0 0 10px;
+    font-size: 20px;
+  }
+}
+

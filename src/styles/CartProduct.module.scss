@@ -1,0 +1,77 @@
+.product {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px 10px 10px;
+  margin-bottom: 5px;
+  background: var(--tg-theme-bg-color);
+
+  &_img {
+    max-width: 120px;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &_price, &_description {
+    color: var(--tg-theme-text-color);
+  }
+
+  &_block {
+    text-align: left;
+    width: 80%;
+    max-width: 400px;
+    margin-left: 20px;
+  }
+
+  &_actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_stepper {
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    background: var(--tg-theme-button-color);
+  }
+
+  &_button, &_count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border: none;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+  }
+
+  &_button {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+
+  &_count {
+    width: 40px;
+    text-align: center;
+  }
+
+  &_icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--tg-theme-button-text-color);
+  }
+
+  &_remove {
+    width: 30px;
+    display: flex;
+  }
+
+  &_icon__remove {
+    stroke: var(--tg-theme-hint-color);
+    width: 22px;
+    height: auto;
+  }
+}
+
