@@ -1,4 +1,5 @@
 // import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import Image from 'next/image';
 
@@ -10,6 +11,7 @@ const CartProduct = ({ productInfo, actionClickInc, actionClickDec, deleteAction
 
   // dispatch(action(productInfo.id)
   // dispatch(deleteAction(productInfo.id))
+
   const stepperAction = (name: string, action: (id: string) => void) => {
     return (
       <button className={styles.product_button}>
@@ -25,7 +27,7 @@ const CartProduct = ({ productInfo, actionClickInc, actionClickDec, deleteAction
   return (
     <li className={styles.product}>
       <div className={styles.product_img}>
-        <img src={productInfo.image} />
+        <img src={productInfo.image}/>
       </div>
       <div className={styles.product_block}>
         <p className={styles.product_price}>

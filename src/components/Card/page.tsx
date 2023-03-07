@@ -4,25 +4,30 @@ import Link from "next/link";
 import sliceText from '@/helpers/sliceText';
 import Icon from "@/helpers/iconRequest";
 
-import './item.css';
+import styles from '@/styles/Card.module.scss';
+import IconRequest from "@/helpers/iconRequest";
+
 
 
 const Card = ({ link, data, handler }: any) => {
 
   return (
-    <div className='products-card'>
-        <div className='products-favorite'>
-          {/* <Image src='/icons/favorite-like-love.svg' alt="icon"
-            className={`products-favorite__icon ${data.isFavorite ? 'products-favorite__icon-active' : ''}`}
-          /> */}
-          <Icon className={`products-favorite__icon ${data.isFavorite ? 'products-favorite__icon-active' : ''}`} path={'icons/favorite-like-love.svg'} />
+    <div className={styles.main}>
+        <div className={styles.favorite}>
+          <IconRequest
+            className={`
+              ${styles.favorite_icon}
+              ${data.isFavorite ? styles.active : ''}
+            `}
+            path={'icons/favorite-like-love.svg'}
+          />
         </div>
-        <Link href={link} className='products-link'>
-          <div className='products-block'>
-            <Icon className='products-block__img' path={data.image} />
+        <Link href={link} className={styles.link}>
+          <div className={styles.block}>
+            <Icon className={styles.block__img} path={data.image} />
           </div>
-            <p className=' products-description'>{sliceText(data.description)}...</p>
-            <p  className='products-price'>{data.price} <span>₽</span></p>
+            <p className={styles.description}>{sliceText(data.description)}...</p>
+            <p  className={styles.price}>{data.price} <span>₽</span></p>
         </Link>
     </div>
   );
