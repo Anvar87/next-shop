@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import  Link from "next/link";
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 
 import {
   increment,
@@ -17,13 +17,12 @@ import LayOut from '@/components/layout';
 
 import styles from '@/styles/Cart.module.scss'
 // import { AnyAction } from "@reduxjs/toolkit";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
 
 export default function Cart() {
   const { cartProducts, totalCost, totalCount } = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
-  console.log(cartProducts, 'cartProductscartProducts')
+  console.log(cartProducts, 'cartProducts cartProducts')
 
   const calcCostCount = () => {
     dispatch(calcTotalCost());

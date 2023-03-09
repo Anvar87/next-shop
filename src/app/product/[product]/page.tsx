@@ -40,7 +40,7 @@ const Product = () => {
       dispatch(calcTotalCount());
       setIsAdded(true);
     } else {
-      return <Link to='/cart'>Dashboard</Link>
+      // return <Link to='/cart'>Dashboard</Link>
     }
   };
 
