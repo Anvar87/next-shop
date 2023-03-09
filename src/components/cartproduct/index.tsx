@@ -3,14 +3,15 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
-import styles from '@/styles/CartProduct.module.css';
+import styles from '@/styles/CartProduct.module.scss';
+import { useAppDispatch } from '@/store/hook';
 
 const CartProduct = ({ productInfo, actionClickInc, actionClickDec, deleteAction } : any) => {
 
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // dispatch(action(productInfo.id)
-  // dispatch(deleteAction(productInfo.id))
+  // dispatch(action(productInfo.id))
+  dispatch(deleteAction(productInfo.id))
 
   const stepperAction = (name: string, action: (id: string) => void) => {
     return (

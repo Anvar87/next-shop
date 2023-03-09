@@ -1,60 +1,64 @@
 "use client";
+
 import { useEffect } from "react";
 import  Link from "next/link";
-// import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 
 import {
   increment,
   decrement,
   calcTotalCost,
   deleteProduct,
-  calcTotalCount
+  calcTotalCount,
 } from "@/features/cart/cartSlice";
 
 import CartProduct from '@/components/cartproduct';
 import LayOut from '@/components/layout';
 
 import styles from '@/styles/Cart.module.scss'
+// import { AnyAction } from "@reduxjs/toolkit";
 
 export default function Cart() {
-//   const { cartProducts, totalCost, totalCount } = useSelector(state => state.cart);
-//   const dispatch = useDispatch();
+  const { cartProducts, totalCost, totalCount } = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
 
-//   const calcCostCount = () => {
-//     dispatch(calcTotalCost());
-//     dispatch(calcTotalCount());
-//   }
+  console.log(cartProducts, 'cartProducts cartProducts')
 
-//   useEffect(() => {
-//     calcCostCount();
-//     return () => {
-//       calcCostCount();
-//     }
-//   }, [cartProducts]);
+  const calcCostCount = () => {
+    dispatch(calcTotalCost());
+    dispatch(calcTotalCount());
+  }
+
+  useEffect(() => {
+    calcCostCount();
+    return () => {
+      calcCostCount();
+    }
+  }, [cartProducts]);
   return (
     <main>
       <LayOut>
-      {/* {cartProducts.length > 0 ? */}
+      {cartProducts.length > 0 ?
         <div>
           <section className={styles.info}>
-            {/* <h2 className={styles.info_title}>Корзина ({totalCount})</h2> */}
+            <h2 className={styles.info_title}>Корзина ({totalCount})</h2>
             <div className={styles.info_total}>
-              {/* {totalCost}  */}
+              {totalCost}
               ₽
             </div>
           </section>
           <section className={styles.product}>
-            {/* <ul className={styles.product_list}>
+            <ul className={styles.product_list}>
               {cartProducts.map((product, idx) => (
                 <CartProduct
                   productInfo={product}
                   actionClickInc={increment}
                   actionClickDec={decrement}
-                  key={product.name + idx}
+                  key={product.id}
                   deleteAction={deleteProduct}
                 />
               ))}
-            </ul> */}
+            </ul>
           </section>
           <section className='cart-order'>
             <Link href={''}
@@ -66,7 +70,7 @@ export default function Cart() {
           <div>
             <h2> Корзина пуста!</h2>
           </div>
-        {/* } */}
+        } 
     </LayOut>
     </main>
   )

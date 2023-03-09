@@ -1,69 +1,75 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import LayOut from '@/components/layout';
-import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-
-import CartTab from '@/assets/icons/shopping-cart.svg';
+import { Link } from "react-router-dom";
+import { useRouter } from 'next-router-mock';
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { addProductInCart, calcTotalCount } from "@/features/cart/cartSlice";
 import IconRequest from '@/helpers/iconRequest';
 
-// import { addProductInCart, calcTotalCount } from "../../features/cart/cartSlice";
+import CartTab from '@/assets/icons/shopping-cart.svg';
 
 import styles from '@/styles/Product.module.scss';
+
 
 const Product = () => {
   const [isAdded, setIsAdded] = useState(false);
 
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const router = useRouter();
 
-  // const { cartProducts } = useSelector(state => state.cart);
-  // const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(router, 'router')
+  },[])
 
-  // const data = location.state;
+  const { cartProducts } = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   setIsAdded(cartProducts.some(itm => itm.id === data.id));
-  // }, [data]);
+  console.log(cartProducts, 'cartProducts')
 
-  // const handleAddToCart = () => {
-  //   if (!isAdded) {
-  //     dispatch(addProductInCart(data));
-  //     dispatch(calcTotalCount());
-  //     setIsAdded(true);
-  //   } else {
-  //     navigate('/fleabot/cart');
-  //   }
-  // };
+  const data = router.query;
+
+  useEffect(() => {
+    setIsAdded(cartProducts.some(itm => itm.id === data.id));
+  }, [data]);
+
+  const handleAddToCart = () => {
+    if (!isAdded) {
+      dispatch(addProductInCart(data));
+      dispatch(calcTotalCount());
+      setIsAdded(true);
+    } else {
+      // return <Link to='/cart'>Dashboard</Link>
+    }
+  };
 
   return (
     <LayOut>
       <div className={styles.main}>
         <section className={styles.section}>
           <div className={styles.img}>
-            {/* <img src={data.image}/> */}
-            <IconRequest path='images/18503-63Deeppurple.jpg'/>
+            <IconRequest path={data.image}/>
           </div>
           <div className={styles.block}>
             <div className={styles.text}>
-              {/* {data.description} */}
-              <p>Apple iPhone 14 Pro Max 128GB (Тёмно-фиолетовый | Deep Purple)</p>
+              {data.name}
             </div>
             <div className={styles.price}>
-              <b>114990 <span>₽</span></b>
+              {data.price}<span>₽</span>
             </div>
-            <div className={styles.description}></div>
+            <div className={styles.description}>
+              {data.description}
+            </div>
             <div className={styles.button}>
               <div
                 className={styles.button__cart + isAdded ? styles.button__active : ''}
-                // onClick={handleAddToCart}
+                onClick={handleAddToCart}
               >
                 <Image src={CartTab} alt='' className={styles.button__icon} />
                 <div className={styles.button__info}>
                   <span className={styles.button__text}>{isAdded ? 'Перейти' : 'Добавить'} в корзину</span>
-                  {/* <span className={styles.button__price}>{data.price} ₽</span> */}
+                  <span className={styles.button__price}>{data.price} ₽</span>
                 </div>
               </div>
             </div>

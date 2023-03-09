@@ -9,26 +9,26 @@ import IconRequest from "@/helpers/iconRequest";
 
 
 
-const Card = ({ link, data, handler }: any) => {
+const  Card = ({ link, data, handler, addProd }: any) => {
 
   return (
-    <div className={styles.main}>
-        <div className={styles.favorite}>
-          <IconRequest
-            className={`
-              ${styles.favorite_icon}
-              ${data.isFavorite ? styles.active : ''}
-            `}
-            path={'icons/favorite-like-love.svg'}
-          />
+    <div className={styles.main}  onClick={addProd}>
+      <div className={styles.favorite} onClick={handler}>
+        <IconRequest
+          className={`
+            ${styles.favorite_icon}
+            ${data.isFavorite ? styles.active : ''}
+          `}
+          path={'icons/favorite-like-love.svg'}
+        />
+      </div>
+      <Link href={link} className={styles.link}>
+        <div className={styles.block}>
+          <Icon className={styles.block__img} path={data.image} />
         </div>
-        <Link href={link} className={styles.link}>
-          <div className={styles.block}>
-            <Icon className={styles.block__img} path={data.image} />
-          </div>
-            <p className={styles.description}>{sliceText(data.description)}...</p>
-            <p  className={styles.price}>{data.price} <span>₽</span></p>
-        </Link>
+          <p className={styles.description}>{sliceText(data.description)}...</p>
+          <p  className={styles.price}>{data.price} <span>₽</span></p>
+      </Link>
     </div>
   );
 };
