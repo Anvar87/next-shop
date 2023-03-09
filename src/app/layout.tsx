@@ -1,4 +1,5 @@
 import TabBar from "@/components/tabbar"
+import { Providers } from "./providers"
 
 export const metadata = {
   title: 'Next.js',
@@ -13,8 +14,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
-        <TabBar/>
+        <Providers>
+          {children}
+          <TabBar/>
+        </Providers>
       </body>
     </html>
   )

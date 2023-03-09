@@ -3,7 +3,7 @@ import Image from 'next/image';
 import DefaultImg from "@/assets/icons/delivery-fast.svg";
 
 interface Params {
-  path: string;
+  path: any;
   className?: string;
   alt?: string;
   width?:  number;
