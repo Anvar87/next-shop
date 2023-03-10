@@ -3,7 +3,7 @@
   justify-content: space-between;
   padding: 10px 20px 10px 10px;
   margin-bottom: 5px;
-  background: var(--tg-theme-bg-color);
+  // background: var(--tg-theme-bg-color);
 
   &_img {
     max-width: 120px;
@@ -14,7 +14,7 @@
   }
 
   &_price, &_description {
-    color: var(--tg-theme-text-color);
+    // color: var(--tg-theme-text-color);
   }
 
   &_block {

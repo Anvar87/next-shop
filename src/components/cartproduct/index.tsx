@@ -1,15 +1,18 @@
 // import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import Image from 'next/image';
 
-import styles from '@/styles/CartProduct.module.css';
+import styles from '@/styles/CartProduct.module.scss';
+import { useAppDispatch } from '@/store/hook';
 
 const CartProduct = ({ productInfo, actionClickInc, actionClickDec, deleteAction } : any) => {
 
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // dispatch(action(productInfo.id)
-  // dispatch(deleteAction(productInfo.id))
+  // dispatch(action(productInfo.id))
+  dispatch(deleteAction(productInfo.id))
+
   const stepperAction = (name: string, action: (id: string) => void) => {
     return (
       <button className={styles.product_button}>
@@ -25,7 +28,7 @@ const CartProduct = ({ productInfo, actionClickInc, actionClickDec, deleteAction
   return (
     <li className={styles.product}>
       <div className={styles.product_img}>
-        <img src={productInfo.image} />
+        <img src={productInfo.image}/>
       </div>
       <div className={styles.product_block}>
         <p className={styles.product_price}>
