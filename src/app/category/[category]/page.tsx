@@ -1,38 +1,25 @@
-"use client"
+"use client";
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+// import { addProductInCart, calcTotalCost, CartProduct, increment } from '@/features/cart/cartSlice';
 
 import LayOut from '@/components/layout';
-
-import { addToFavoriteList } from "@/features/products/productsSlice";
-// import { useRouter } from 'next/router';
+import { addToFavoriteList } from "@/features/products/productsSlice";;
 import Card from '@/components/card/page';
+
 import styles from '@/styles/Card.module.scss';
-import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { addProductInCart, calcTotalCost, increment } from '@/features/cart/cartSlice';
-import { useRouter } from 'next-router-mock';
-import { useEffect } from 'react';
 
 
-type Params = {
-  params: {
-    category: string
-  }
-}
-
-
-export default function Category({ ...params }: any) {
+export default function Category() {
   const { products } = useAppSelector(state => state.products);
-  console.log(products, 'products')
   const dispatch = useAppDispatch();
 
   const addToFavorite = (id: string) => {
     dispatch(addToFavoriteList(id))
   };
 
-  const router = useRouter();
-
-  const addProduct = ( product:any ) => {
-    router.push({query: product})
-  }
+  // const addProduct = ( product: CartProduct ) => {
+  //   dispatch(addProductInCart(product))
+  // }
 
   return (
     <LayOut>
@@ -43,9 +30,9 @@ export default function Category({ ...params }: any) {
             <Card
               key={product.name + i}
               link={`/product/${product.link}`}
-              data={product}
+              product={product}
               handler={addToFavorite}
-              addProd={()=>addProduct(product)}
+              // addProd={addProduct}
             />
           ))}
         </div>

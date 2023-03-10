@@ -1,33 +1,31 @@
-
-import Link from "next/link";
+import Link from 'next/link';
+import Image from 'next/image';
 
 import sliceText from '@/helpers/sliceText';
-import Icon from "@/helpers/iconRequest";
+import FavoriteIcon from '@/assets/icons/favorite-like-love.svg';
 
 import styles from '@/styles/Card.module.scss';
-import IconRequest from "@/helpers/iconRequest";
 
 
-
-const  Card = ({ link, data, handler, addProd }: any) => {
-
+const  Card = ({ link, product, handler }: any) => {
   return (
-    <div className={styles.main}  onClick={addProd}>
+    <div className={styles.main}>
       <div className={styles.favorite} onClick={handler}>
-        <IconRequest
+        <Image
           className={`
             ${styles.favorite_icon}
-            ${data.isFavorite ? styles.active : ''}
+            ${product.isFavorite ? styles.active : ''}
           `}
-          path={'icons/favorite-like-love.svg'}
+          src={FavoriteIcon}
+          alt=""
         />
       </div>
       <Link href={link} className={styles.link}>
         <div className={styles.block}>
-          <Icon className={styles.block__img} path={data.image} />
+          <Image className={styles.block__img} src={product.image} alt=""/>
         </div>
-          <p className={styles.description}>{sliceText(data.description)}...</p>
-          <p  className={styles.price}>{data.price} <span>₽</span></p>
+          <p className={styles.description}>{sliceText(product.description)}...</p>
+          <p  className={styles.price}>{product.price} <span>₽</span></p>
       </Link>
     </div>
   );

@@ -22,8 +22,6 @@ export default function Cart() {
   const { cartProducts, totalCost, totalCount } = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
-  console.log(cartProducts, 'cartProducts cartProducts')
-
   const calcCostCount = () => {
     dispatch(calcTotalCost());
     dispatch(calcTotalCount());
@@ -31,10 +29,8 @@ export default function Cart() {
 
   useEffect(() => {
     calcCostCount();
-    return () => {
-      calcCostCount();
-    }
   }, [cartProducts]);
+
   return (
     <main>
       <LayOut>
@@ -61,8 +57,7 @@ export default function Cart() {
             </ul>
           </section>
           <section className='cart-order'>
-            <Link href={''}
-              // to={'/fleabot/payment'}
+            <Link href='/payment'
               className='cart-order__create'>Оформить заказ</Link>
           </section>
         </div>

@@ -1,46 +1,46 @@
 "use client"
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import LayOut from '@/components/layout';
-import { Link } from "react-router-dom";
-import { useRouter } from 'next-router-mock';
 import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { addProductInCart, calcTotalCount } from "@/features/cart/cartSlice";
-import IconRequest from '@/helpers/iconRequest';
+import { addProductInCart, calcTotalCount, CartProduct } from "@/features/cart/cartSlice";
+import { useRouter } from "next/navigation"
 
 import CartTab from '@/assets/icons/shopping-cart.svg';
+import PurplePhone from "@/assets/images/18503-63Deeppurple.jpg";
 
 import styles from '@/styles/Product.module.scss';
 
 
-const Product = () => {
+const Product = (props: any) => {
   const [isAdded, setIsAdded] = useState(false);
+  const [product, setProduct] = useState<CartProduct>({
+    name: '',
+    id: '',
+    image: '',
+    price: 0,
+    count: 0,
+    description: ''
+  });
+  const { products } = useAppSelector(state => state.products);
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(router, 'router')
-  },[])
-
-  const { cartProducts } = useAppSelector(state => state.cart);
-  const dispatch = useAppDispatch();
-
-  console.log(cartProducts, 'cartProducts')
-
-  const data = router.query;
-
-  useEffect(() => {
-    setIsAdded(cartProducts.some(itm => itm.id === data.id));
-  }, [data]);
+   useEffect(() => {
+    const item = products.find(item => item.link === `/${props.params.product}`);
+    if (item !== undefined) setProduct({...item, count: 0});
+  }, []);
 
   const handleAddToCart = () => {
+    const product = products.find(item => item.link === `/${props.params.product}`)
     if (!isAdded) {
-      dispatch(addProductInCart(data));
+      dispatch(addProductInCart(product));
       dispatch(calcTotalCount());
       setIsAdded(true);
     } else {
-      // return <Link to='/cart'>Dashboard</Link>
+      router.push('/cart');
     }
   };
 
@@ -49,17 +49,17 @@ const Product = () => {
       <div className={styles.main}>
         <section className={styles.section}>
           <div className={styles.img}>
-            <IconRequest path={data.image}/>
+            <Image src={PurplePhone} alt=""/>
           </div>
           <div className={styles.block}>
             <div className={styles.text}>
-              {data.name}
+              {product.name}
             </div>
             <div className={styles.price}>
-              {data.price}<span>₽</span>
+              {product.price}<span>₽</span>
             </div>
             <div className={styles.description}>
-              {data.description}
+              {product.description}
             </div>
             <div className={styles.button}>
               <div
@@ -69,7 +69,7 @@ const Product = () => {
                 <Image src={CartTab} alt='' className={styles.button__icon} />
                 <div className={styles.button__info}>
                   <span className={styles.button__text}>{isAdded ? 'Перейти' : 'Добавить'} в корзину</span>
-                  <span className={styles.button__price}>{data.price} ₽</span>
+                  <span className={styles.button__price}>{product.price} ₽</span>
                 </div>
               </div>
             </div>

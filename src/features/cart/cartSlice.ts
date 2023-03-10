@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
-type CartProducts = {
+export type CartProduct = {
   name: string | number;
   id: string | number;
   image: any;
@@ -11,7 +11,7 @@ type CartProducts = {
 }
 
 type CartState = {
-  cartProducts: CartProducts[];
+  cartProducts: CartProduct[];
   totalCost: number;
   totalCount: number;
 }
@@ -22,7 +22,7 @@ const initialState: CartState = {
   totalCount: 0,
 }
 
-const calcProductCount = (products: CartProducts[], arg: PayloadAction<string>) => {
+const calcProductCount = (products: CartProduct[], arg: PayloadAction<string>) => {
   const id = arg.payload;
   const type = arg.type;
   const isIncrement = type === 'cart/increment';
