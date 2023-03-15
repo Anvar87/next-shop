@@ -25,7 +25,7 @@ const  Card = ({ link, product, handler }: any) => {
           <Image className={styles.block__img} src={product.image} alt=""/>
         </div>
           <p className={styles.description}>{sliceText(product.description)}...</p>
-          <p  className={styles.price}>{product.price} <span>₽</span></p>
+          <p className={styles.price}>{product.price} <span>₽</span></p>
       </Link>
     </div>
   );

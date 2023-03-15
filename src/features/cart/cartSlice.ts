@@ -8,6 +8,7 @@ export type CartProduct = {
   price: number;
   count: number;
   description: string;
+  isAdded: boolean;
 }
 
 type CartState = {
@@ -26,12 +27,10 @@ const calcProductCount = (products: CartProduct[], arg: PayloadAction<string>) =
   const id = arg.payload;
   const type = arg.type;
   const isIncrement = type === 'cart/increment';
-  const numb = isIncrement ? 1 : 0;
-
+  const numb = isIncrement ? 0 : 1;
   products = products.map((item) => {
-    console.log(item, 'item')
     if (item.id === id && item.count > numb) {
-      const count = isIncrement ? item.count -= 1 : item.count += 1;
+      const count = isIncrement ? item.count += 1 : item.count -= 1;
       return { ...item, count };
     }
     return item;
@@ -66,7 +65,7 @@ export const cartSlice = createSlice({
     },
     addProductInCart: (state, arg) => {
       const product = arg.payload;
-      state.cartProducts.push({ ...product, count: 1 });
+      state.cartProducts.push({ ...product, count: 1, isAdded: true });
     },
   }
 });

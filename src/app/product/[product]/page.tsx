@@ -5,6 +5,7 @@ import Image from 'next/image';
 import LayOut from '@/components/layout';
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { addProductInCart, calcTotalCount, CartProduct } from "@/features/cart/cartSlice";
+import { createProduct } from "@/features/products/productsSlice";
 import { useRouter } from "next/navigation"
 
 import CartTab from '@/assets/icons/shopping-cart.svg';
@@ -14,38 +15,32 @@ import styles from '@/styles/Product.module.scss';
 
 
 const Product = (props: any) => {
-  const [isAdded, setIsAdded] = useState(false);
-  const [product, setProduct] = useState<CartProduct>({
-    name: '',
-    id: '',
-    image: '',
-    price: 0,
-    count: 0,
-    description: ''
-  });
   const { products } = useAppSelector(state => state.products);
+  const { product } = useAppSelector(state => state.products);
   const dispatch = useAppDispatch();
 
   const router = useRouter();
 
    useEffect(() => {
-    const item = products.find(item => item.link === `/${props.params.product}`);
-    if (item !== undefined) setProduct({...item, count: 0});
+    const productItem = products.find(item => item.link === `/${props.params.product}`);
+    if (product.name !== productItem.name) {
+      dispatch(createProduct({ ...productItem, isAdded: false }));
+    }
   }, []);
 
   const handleAddToCart = () => {
-    const product = products.find(item => item.link === `/${props.params.product}`)
-    if (!isAdded) {
-      dispatch(addProductInCart(product));
+    const productItem = products.find(item => item.link === `/${props.params.product}`)
+    if (productItem && !product.isAdded) {
+      dispatch(createProduct({ ...productItem, isAdded: true }));
+      dispatch(addProductInCart(productItem));
       dispatch(calcTotalCount());
-      setIsAdded(true);
     } else {
       router.push('/cart');
     }
   };
 
   return (
-    <LayOut>
+    // <LayOut>
       <div className={styles.main}>
         <section className={styles.section}>
           <div className={styles.img}>
@@ -53,31 +48,32 @@ const Product = (props: any) => {
           </div>
           <div className={styles.block}>
             <div className={styles.text}>
-              {product.name}
-            </div>
-            <div className={styles.price}>
-              {product.price}<span>₽</span>
-            </div>
-            <div className={styles.description}>
               {product.description}
             </div>
-            <div className={styles.button}>
-              <div
-                className={styles.button__cart + isAdded ? styles.button__active : ''}
-                onClick={handleAddToCart}
-              >
-                <Image src={CartTab} alt='' className={styles.button__icon} />
-                <div className={styles.button__info}>
-                  <span className={styles.button__text}>{isAdded ? 'Перейти' : 'Добавить'} в корзину</span>
-                  <span className={styles.button__price}>{product.price} ₽</span>
+            <div className={styles.description}>
+              {/* {product.description} */}
+            </div>
+            <div className={styles.pay}>
+              <div className={styles.price}>{product.price} ₽</div>
+              <div className={styles.button}>
+                <div
+                  className={styles.button__cart + product.isAdded ? styles.button__active : ''}
+                  onClick={handleAddToCart}
+                >
+                  <Image src={CartTab} alt='' className={styles.button__icon}/>
+                  <div className={styles.button__text}>{product.isAdded ? 'Перейти' : 'Добавить'} в корзину</div>
+                  {/* <div className={styles.button__info}> */}
+                    {/* <span className={styles.button__price}>{product.price} ₽</span> */}
+                  {/* </div> */}
                 </div>
               </div>
             </div>
           </div>
         </section>
       </div>
-    </LayOut>
+    // </LayOut>
   )
 };
 
 export default Product;
+
