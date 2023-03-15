@@ -1,12 +1,13 @@
+@import 'variables.module.scss';
+
 .main {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: white;
   border-start-end-radius: 5px;
   border-start-start-radius: 5px;
-  border-top: 1px solid var(--tg-theme-secondary-bg-color);
+  border-top: 1px solid $-text-color;
   z-index: 2;
 }
 
@@ -15,6 +16,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  background: $-prime-color;
+
 }
 
 .link {
@@ -26,7 +29,7 @@
 .svg {
   width: 16px;
   height: 16px;
-  fill: var(--tg-theme-text-color);
+
 
   &__delivery {
     width: 16px;
@@ -63,5 +66,3 @@
     color: var(--tg-theme-text-color);
   }
 }
-
-

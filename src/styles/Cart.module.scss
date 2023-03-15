@@ -1,51 +1,94 @@
+@import 'variables.module.scss';
+
+.main {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  background: $-prime-color;
+  color: $-text-color;
+  padding: 20px;
+}
 
 .info {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin: 0 20px;
-  color: var(--tg-theme-text-color);
+  padding-bottom: 20px;
+  position: relative;
+
+  // :after {
+  //   content: '';
+  //   position: absolute;
+  //   display: block;
+  //   width: 150px;
+  //   height: 3px;
+  //   background: $-button-color;
+  // }
 
   &_title {
     font-size: 28px;
     margin: 0;
+    font-weight: 700;
+
   }
 
   &_total {
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 28px;
+    font-weight: 700;
   }
+}
 
+.info::after {
+  content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    bottom: 0;
+    height: 2px;
+    border-radius: 1px;
+    background: $-button-color;
 }
 
 
 .product {
   margin-top: 20px;
+  font-family: "GTEestiPro",arial,sans-serif;
 
   &_list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    // list-style: none;
+    list-style: none;
     margin: 0;
     padding: 0;
   }
 }
 
 .order {
-  margin: 20px 20px 0;
-
-  &_create {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 46px;
-    padding: 5px 20px;
-    font-size: 16px;
-    text-decoration: none;
-    color: var(--tg-theme-button-text-color);
-    background: var(--tg-theme-button-color);
-    border-radius: 50px;
+  font-family: "GTEestiPro",arial,sans-serif;
+  position: fixed;
+  text-align: center;
+  bottom: 51px;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 350px;
+  width: 100%;
+  margin: 20px 0;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 30px;
+  background: $-button-color;
+  a {
+    color: $-dark-color;
   }
-
 }
 
+.empty {
+  display: flex;
+  justify-content: center;
+  font-family: "GTEestiPro",arial,sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  text-shadow: 1px 1px $-button-color;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}

@@ -11,6 +11,7 @@ const products = [
     description: 'Apple iPhone 14 Pro Max 128GB (Тёмно-фиолетовый | Deep Purple)',
     link: '/apple-iphone-14-pro-max-128gb-deep-purple',
     isFavorite: false,
+    isAdded: false
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const products = [
     description: 'Apple iPhone 13 mini 128GB (Розовый | Pink)',
     link: '/apple-iphone-13-mini-128gb-pink',
     isFavorite: false,
+    isAdded: false
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const products = [
     description: 'Apple iPhone 12 Pro Max 128GB (Графитовый | Graphite)',
     link: '/apple-iphone-12-pro-max-128gb-graphite',
     isFavorite: false,
+    isAdded: false
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const products = [
     description: 'Apple iPhone 14 Pro Max 128GB (Тёмно-фиолетовый | Deep Purple)',
     link: '/apple-iphone-14-pro-max-128gb-deep-purple',
     isFavorite: false,
+    isAdded: false
   },
   {
     id: 5,
@@ -47,6 +51,7 @@ const products = [
     description: 'Apple iPhone 13 mini 128GB (Розовый | Pink)',
     link: '/apple-iphone-13-mini-128gb-pink',
     isFavorite: false,
+    isAdded: false
   },
   {
     id: 6,
@@ -56,8 +61,20 @@ const products = [
     description: 'Apple iPhone 12 Pro Max 128GB (Графитовый | Graphite)',
     link: '/apple-iphone-12-pro-max-128gb-graphite',
     isFavorite: false,
+    isAdded: false
   }
 ];
+
+// type ProductItem = {
+//   id: number;
+//   name: string;
+//   image: any;
+//   price: number;
+//   description: string;
+//   link: string;
+//   isFavorite: boolean;
+//   isAdded: boolean;
+// }
 
 type Product = {
   id: number;
@@ -67,15 +84,18 @@ type Product = {
   description: string;
   link: string;
   isFavorite: boolean;
+  isAdded: boolean;
 }
 
 type Products = {
   products: Product[];
+  product: Product;
   favorites: Product[];
 }
 
 const initialState: Products = {
   products,
+  product: {} as Product,
   favorites: [],
 }
 
@@ -92,10 +112,13 @@ export const productSlice = createSlice({
         return product;
       });
       state.favorites = state.products.filter((favorite) => favorite.isFavorite);
+    },
+    createProduct: (state, arg: PayloadAction<Product>) => {
+      state.product = arg.payload;
     }
   }
 });
 
-export const { addToFavoriteList } = productSlice.actions;
+export const { addToFavoriteList, createProduct } = productSlice.actions;
 
 export default productSlice.reducer;

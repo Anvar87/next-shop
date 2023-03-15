@@ -1,5 +1,6 @@
 import TabBar from "@/components/tabbar"
-import { Providers } from "./providers"
+import { Providers } from "./providers";
+import '@/styles/globals.css';
 
 export const metadata = {
   title: 'Next.js',
